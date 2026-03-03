@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>トキハカ - Pomodoro Timer</title>
+  <meta name="description" content="A neon-style Pomodoro timer web application using Tsukuyomi UI." />
+  <link rel="stylesheet" href="/Tsukuyomi/tsukuyomi.css">
+  <link rel="stylesheet" href="/src/style.css">
+</head>
+
+<body>
+  <div id="app">
+    <header class="tk-header">
+      <h1>トキハカ</h1>
+      <p class="tk-subtitle">Pomodoro Timer</p>
+    </header>
+
+    <main class="tk-d-flex tk-flex-column tk-align-center tk-gap-lg">
+      <div class="tk-panel timer-display-panel">
+        <div id="timer-display" class="timer-text">25:00</div>
+        <div id="session-status" class="tk-badge tk-badge-outline tk-mb-md">待機中</div>
+
+        <div class="tk-d-flex tk-gap-md tk-justify-center">
+          <button id="start-btn" class="tk-btn">開始</button>
+          <button id="stop-btn" class="tk-btn tk-btn-accent">終了</button>
+        </div>
+      </div>
+
+      <div class="tk-panel stats-panel tk-w-100" style="max-width: 400px;">
+        <h2 class="tk-dialog-title tk-mb-sm">現在のリザルト</h2>
+        <p>完了したポモドーロ: <span id="completed-sessions"
+            style="font-size: 1.5rem; color: var(--tk-color-primary); font-family: var(--tk-font-family-mono); font-weight: bold;">0</span>
+          セッション</p>
+        <div class="tk-mt-md">
+          <button class="tk-btn tk-btn-japan tk-w-100" style="justify-content: center;"
+            data-tk-dialog-target="share-dialog">リザルトをシェア</button>
+        </div>
+      </div>
+    </main>
+
+    <!-- シェアダイアログ -->
+    <div class="tk-dialog-overlay" id="share-dialog">
+      <div class="tk-dialog">
+        <button class="tk-dialog-close-btn">&times;</button>
+        <div class="tk-dialog-header">
+          <h2 class="tk-dialog-title">シェアする</h2>
+        </div>
+        <div class="tk-dialog-content">
+          <div class="tk-d-grid tk-grid-auto-fill-200 tk-gap-md" style="text-align: center;">
+
+            <button id="share-x-btn" class="tk-btn tk-flex-column tk-w-100"
+              style="border-color: #1da1f2; color: #1da1f2; gap: 8px;">
+              <span style="font-size: 1.5rem; font-weight: bold;">𝕏</span>
+              <span style="font-size: 0.8rem;">Xにポスト</span>
+            </button>
+
+            <button id="share-fb-btn" class="tk-btn tk-flex-column tk-w-100"
+              style="border-color: #1877f2; color: #1877f2; gap: 8px;">
+              <span style="font-size: 1.5rem; font-weight: bold;">f</span>
+              <span style="font-size: 0.8rem;">Facebook</span>
+            </button>
+
+            <button id="share-line-btn" class="tk-btn tk-flex-column tk-w-100"
+              style="border-color: #06c755; color: #06c755; gap: 8px;">
+              <span style="font-size: 1.5rem; font-weight: bold;">L</span>
+              <span style="font-size: 0.8rem;">LINE</span>
+            </button>
+
+            <button id="share-copy-btn" class="tk-btn tk-flex-column tk-w-100" style="gap: 8px;">
+              <span style="font-size: 1.5rem; font-weight: bold;">📋</span>
+              <span style="font-size: 0.8rem;">テキストコピー</span>
+            </button>
+
+            <button id="share-download-btn" class="tk-btn tk-flex-column tk-w-100"
+              style="grid-column: 1 / -1; gap: 8px;">
+              <span style="font-size: 1.5rem; font-weight: bold;">💾</span>
+              <span style="font-size: 0.8rem;">リザルト画像を保存（Instagram用など）</span>
+            </button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 共有画像生成用の隠しレイアウト -->
+    <div id="share-card-container" style="position: absolute; left: -9999px; top: -9999px;">
+      <div id="share-card" class="tk-panel"
+        style="width: 500px; padding: 40px; background-color: var(--tk-color-bg-base); border: 2px solid var(--tk-color-primary);">
+        <div style="text-align: center;">
+          <h1
+            style="color: var(--tk-color-primary); margin-bottom: 10px; font-size: 2.5rem; text-shadow: var(--tk-shadow-neon-primary);">
+            トキハカ</h1>
+          <p
+            style="color: var(--tk-color-text-sub); font-family: var(--tk-font-family-mono); margin-bottom: 30px; letter-spacing: 2px;">
+            Pomodoro Timer</p>
+
+          <div
+            style="background: rgba(0, 240, 255, 0.05); border: 1px solid var(--tk-color-border); padding: 30px; border-radius: var(--tk-radius-md); box-shadow: inset 0 0 20px rgba(0,240,255,0.1);">
+            <h2 style="color: var(--tk-color-text-main); margin-bottom: 15px; font-size: 1.5rem;">Result</h2>
+            <div style="font-size: 1.2rem; margin-bottom: 10px;">完了セッション: <span id="share-card-sessions"
+                style="color: var(--tk-color-primary); font-family: var(--tk-font-family-mono); font-size: 2rem; font-weight: bold; margin: 0 10px;">0</span>
+              回</div>
+            <div style="font-size: 1.2rem;">合計作業時間: <span id="share-card-minutes"
+                style="color: var(--tk-color-primary); font-family: var(--tk-font-family-mono); font-size: 2rem; font-weight: bold; margin: 0 10px;">0</span>
+              分</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Toasts Container -->
+  <div id="tk-toasts" class="tk-toast-container"></div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>

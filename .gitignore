@@ -1,0 +1,7 @@
+# Vite
+node_modules/
+dist/
+.vite/
+.turbo/
+# Markdown
+トキハカ仕様書.md

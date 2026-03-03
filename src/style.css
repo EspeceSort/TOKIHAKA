@@ -1,0 +1,62 @@
+/* Application-specific styles extending Tsukuyomi */
+
+.timer-display-panel {
+    text-align: center;
+    padding: var(--tk-space-xl);
+    min-width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.timer-text {
+    font-size: 6rem;
+    font-family: var(--tk-font-family-mono);
+    color: var(--tk-color-primary);
+    text-shadow: var(--tk-shadow-neon-primary);
+    line-height: 1;
+    margin-bottom: var(--tk-space-md);
+    font-weight: bold;
+    letter-spacing: 4px;
+    font-variant-numeric: tabular-nums;
+}
+
+/* 休憩中のタイマーをアクセントカラーにする */
+/* #session-status.tk-badge-accent + .tk-d-flex {
+   To target buttons if needed 
+} */
+
+/* Adjust toast position slightly to avoid overlapping mobile controls if necessary */
+.tk-toast-container {
+    bottom: var(--tk-space-lg);
+    right: var(--tk-space-lg);
+}
+
+@media (max-width: 480px) {
+    .timer-text {
+        font-size: 4rem;
+    }
+
+    .timer-display-panel {
+        min-width: 100%;
+        padding: var(--tk-space-lg);
+    }
+
+    .tk-toast-container {
+        bottom: var(--tk-space-sm);
+        right: var(--tk-space-sm);
+        left: var(--tk-space-sm);
+    }
+
+    .tk-toast {
+        min-width: unset;
+        width: 100%;
+        max-width: unset;
+    }
+}
+
+/* Ensure share card renders properly when html2canvas captures it, even if 'hidden' */
+#share-card-container {
+    pointer-events: none;
+    z-index: -9999;
+}
