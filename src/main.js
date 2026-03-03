@@ -57,7 +57,7 @@ function notifyUser(title, body) {
 const timer = new Timer({
     onTick: (timeString) => {
         timerDisplay.textContent = timeString;
-        document.title = `${timeString} - トキハカ`;
+        document.title = `${timeString} - TOKIHAKA`;
     },
     onModeChange: (isWorkMode) => {
         sessionStatus.textContent = isWorkMode ? '作業中' : '休憩中';
@@ -68,10 +68,10 @@ const timer = new Timer({
             totalWorkMinutes += 25;
             completedSessionsDisplay.textContent = completedSessions;
             showToast('作業完了', 'お疲れ様でした！5分間の休憩に入ります。');
-            notifyUser('トキハカ - 作業完了', 'お疲れ様でした！5分間の休憩に入ります。');
+            notifyUser('TOKIHAKA - 作業完了', 'お疲れ様でした！5分間の休憩に入ります。');
         } else {
             showToast('休憩終了', '休憩終わり！作業を再開します。', true);
-            notifyUser('トキハカ - 休憩終了', '休憩終わり！作業を再開します。');
+            notifyUser('TOKIHAKA - 休憩終了', '休憩終わり！作業を再開します。');
         }
     }
 });
@@ -89,15 +89,15 @@ stopBtn.addEventListener('click', () => {
     timer.reset();
     startBtn.disabled = false;
     sessionStatus.textContent = '待機中';
-    document.title = 'トキハカ - Pomodoro Timer';
+    document.title = 'TOKIHAKA - Pomodoro Timer';
 });
 
 function getShareText() {
-    return `今日の作業結果！\n【トキハカ】ポモドーロタイマー\n完了: ${completedSessions}セッション\n合計作業時間: ${totalWorkMinutes}分\n#トキハカ\n`;
+    return `今日の作業結果！\n【TOKIHAKA】ポモドーロタイマー\n完了: ${completedSessions}セッション\n合計作業時間: ${totalWorkMinutes}分\n#TOKIHAKA\n`;
 }
 
 function getAppUrl() {
-    return 'https://shiki.github.io/TOKIHAKA/'; // Change this to actual URL if deployed elsewhere
+    return 'https://especesort.github.io/TOKIHAKA/'; // Change this to actual URL if deployed elsewhere
 }
 
 // 1. X (Twitter)

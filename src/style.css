@@ -21,11 +21,6 @@
     font-variant-numeric: tabular-nums;
 }
 
-/* 休憩中のタイマーをアクセントカラーにする */
-/* #session-status.tk-badge-accent + .tk-d-flex {
-   To target buttons if needed 
-} */
-
 /* Adjust toast position slightly to avoid overlapping mobile controls if necessary */
 .tk-toast-container {
     bottom: var(--tk-space-lg);
