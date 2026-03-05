@@ -54,14 +54,27 @@ function notifyUser(title, body) {
     }
 }
 
+function renderTimerText(timeString) {
+    const chars = timeString.split('');
+    const html = chars.map(char => {
+        // Increase width for more spacing between characters
+        const width = char === ':' ? '0.5em' : '0.8em';
+        return `<span style="display:inline-block; width:${width}; text-align:center;">${char}</span>`;
+    }).join('');
+    timerDisplay.innerHTML = html;
+}
+
+// Initial render to prevent jump on first tick
+renderTimerText('25:00');
+
 const timer = new Timer({
     onTick: (timeString) => {
-        timerDisplay.textContent = timeString;
+        renderTimerText(timeString);
         document.title = `${timeString} - TOKIHAKA`;
     },
     onModeChange: (isWorkMode) => {
         sessionStatus.textContent = isWorkMode ? '作業中' : '休憩中';
-        sessionStatus.className = `tk-badge ${isWorkMode ? 'tk-badge-outline' : 'tk-badge-outline tk-badge-accent'}`;
+        sessionStatus.className = `tk-badge tk-mb-md ${isWorkMode ? 'tk-badge-outline' : 'tk-badge-outline tk-badge-accent'}`;
 
         if (!isWorkMode) {
             completedSessions++;
@@ -83,12 +96,14 @@ startBtn.addEventListener('click', () => {
     timer.start();
     startBtn.disabled = true;
     sessionStatus.textContent = timer.isWorkMode ? '作業中' : '休憩中';
+    sessionStatus.className = `tk-badge tk-mb-md ${timer.isWorkMode ? 'tk-badge-outline' : 'tk-badge-outline tk-badge-accent'}`;
 });
 
 stopBtn.addEventListener('click', () => {
     timer.reset();
     startBtn.disabled = false;
     sessionStatus.textContent = '待機中';
+    sessionStatus.className = 'tk-badge tk-badge-outline tk-mb-md';
     document.title = 'TOKIHAKA - Pomodoro Timer';
 });
 

@@ -1,12 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+JP:wght@400;700;900&display=swap');
+
 /* Application-specific styles extending Tsukuyomi */
+
+:root {
+    /* Override Tsukuyomi base fonts for a more Cyberpunk feel */
+    --tk-font-family-base: 'Noto Sans JP', "Hiragino Kaku Gothic ProN", sans-serif;
+    --tk-font-family-mono: 'Orbitron', 'Noto Sans JP', "Fira Code", monospace;
+}
+
+.tk-header h1 {
+    font-family: var(--tk-font-family-mono);
+    letter-spacing: 0.1em;
+    font-weight: 900;
+}
 
 .timer-display-panel {
     text-align: center;
     padding: var(--tk-space-xl);
-    min-width: 320px;
+    width: 100%;
+    max-width: 400px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    box-sizing: border-box;
 }
 
 .timer-text {
@@ -19,6 +35,9 @@
     font-weight: bold;
     letter-spacing: 4px;
     font-variant-numeric: tabular-nums;
+    width: 360px;
+    /* Fixed width to prevent digit changes from resizing layout */
+    text-align: center;
 }
 
 /* Adjust toast position slightly to avoid overlapping mobile controls if necessary */
@@ -30,6 +49,8 @@
 @media (max-width: 480px) {
     .timer-text {
         font-size: 4rem;
+        width: 100%;
+        /* Reset fixed width for mobile */
     }
 
     .timer-display-panel {
