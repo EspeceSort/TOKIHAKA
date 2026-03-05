@@ -49,7 +49,7 @@ function showToast(title, message, isAccent = false) {
 }
 
 function notifyUser(title, body) {
-    if (Notification.permission === 'granted') {
+    if ('Notification' in window && Notification.permission === 'granted') {
         new Notification(title, { body });
     }
 }
@@ -90,7 +90,7 @@ const timer = new Timer({
 });
 
 startBtn.addEventListener('click', () => {
-    if (Notification.permission === 'default') {
+    if ('Notification' in window && Notification.permission === 'default') {
         Notification.requestPermission();
     }
     timer.start();
